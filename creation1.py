@@ -8,11 +8,33 @@ from tkinter import filedialog
 from tkinter import messagebox
 import os
 #creation de fenetre tkinter
+if __name__ == "__main__":
+    #creation de fenetre tkinter
+    root = Tk()
+    root.title("Bloc note ")
+    root.geometry("600x400")
+    NotePad_font = Font(root,family='lucida',size=13)
+    
+    
+    ScrollBar = Scrollbar(root)
+    
+    ScrollBar.pack(fill=Y, side=RIGHT)
 
-bloc = tk.Tk()
-bloc.title(" bloc note ")
-bloc.geometry("700x500")
+    
 
+    
+    textArea = Text(root, font=NotePad_font, yscrollcommand=ScrollBar.set)
+    file = None
+    textArea.pack(expand=True,fill="both")
 
+    ScrollBar.config(command=textArea.yview)
 
-bloc.mainloop()
+    
+#creation des menu et sous menu
+   
+
+    
+
+    
+
+    root.mainloop() 
