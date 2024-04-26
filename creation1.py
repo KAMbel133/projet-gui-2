@@ -7,7 +7,7 @@ from tkinter.font import Font
 from tkinter import filedialog
 from tkinter import messagebox
 import os
-#creation de fenetre tkinter
+#creation du bloc note
 if __name__ == "__main__":
     #creation de fenetre tkinter
     root = Tk()
@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     
 
-    
+#creation de la zone de texte
     textArea = Text(root, font=NotePad_font, yscrollcommand=ScrollBar.set)
     file = None
     textArea.pack(expand=True,fill="both")
@@ -31,7 +31,36 @@ if __name__ == "__main__":
 
     
 #creation des menu et sous menu
-   
+    
+    MenuBar = Menu(root)
+
+    FileMenu = Menu(MenuBar, tearoff=0)
+    FileMenu.add_command(label="nouveau fichier", command=newFile)
+    FileMenu.add_command(label="ouvrir un fichier", command=openFile)
+    FileMenu.add_command(label="Sauvegardé", command=save)
+    FileMenu.add_separator()
+    FileMenu.add_command(label="Quitte", command=quitFile)
+    MenuBar.add_cascade(label="Fchier", menu=FileMenu)
+
+    EditMenu = Menu(MenuBar, tearoff=0)
+    EditMenu.add_command(label="Cut", command=cut)
+    EditMenu.add_command(label="Copy", command=copy)
+    EditMenu.add_command(label="Paste", command=paste)
+    EditMenu.add_command(label="Font Size", command=changeSize)
+    EditMenu.add_command(label="Font Style", command=changeStyle)
+    
+    
+    MenuBar.add_cascade(label="Edition", menu=EditMenu)
+
+    HelpMenu = Menu(MenuBar, tearoff=0)
+    HelpMenu.add_command(label="about", command=info)
+    MenuBar.add_cascade(label="Help", menu=HelpMenu)
+
+
+
+    root.config(menu=MenuBar)
+
+    
 
     
 
