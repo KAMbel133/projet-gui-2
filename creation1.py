@@ -20,6 +20,22 @@ if __name__ == "__main__":
     
     ScrollBar.pack(fill=Y, side=RIGHT)
 
+#creation de la fonction nouveau fichier
+def newFile():
+    textArea.delete(1.0, END)
+
+#creation de la fonction ouvri un fichier
+
+def openFile():
+    global file
+    file = askopenfilename(defaultextension=".txt", filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
+    if file == "":
+        file = None
+    else:
+       
+        textArea.delete(1.0, END)
+        f = open(file)
+        textArea.insert(1.0, f.read())
     
 
 #creation de la zone de texte
