@@ -44,6 +44,14 @@ def copy():
 def paste():
     text.event_generate(("<<Paste>>"))
 
+def refais():
+    text.edit_undo()
+    return
+
+
+def select():
+    text.tag_add("sel", "1.0", "end")
+
     
 def info():
     messagebox.showinfo("About Bloc note", '''Bloc note
@@ -464,7 +472,6 @@ if __name__ == "__main__":
     FileMenu.add_command(label="nouveau fichier", command=newFile)
     FileMenu.add_command(label="ouvrir un fichier", command=openFile)
     FileMenu.add_command(label="Sauvegardé", command=save)
-    FileMenu.add_separator()
     FileMenu.add_command(label="Quitte", command=quitFile)
     MenuBar.add_cascade(label="Fchier", menu=FileMenu)
 
@@ -472,6 +479,8 @@ if __name__ == "__main__":
     EditMenu.add_command(label="Cut", command=cut)
     EditMenu.add_command(label="Copy", command=copy)
     EditMenu.add_command(label="Paste", command=paste)
+    EditMenu.add_command(label="selectionner", command=select)
+    EditMenu.add_command(label="undo", command=refais)
     EditMenu.add_command(label="Size", command=changeSize)
    
     
