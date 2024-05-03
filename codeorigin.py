@@ -35,6 +35,18 @@ def save():
             messagebox.showinfo("succes", "Le fichier a ete sauvegardé avec succés.")
     except Exception as e:
             messagebox.showerror("Erreur", str(e))
+
+
+def saveAs():
+    try:
+        f = filedialog.asksaveasfile(mode='w', defaultextension='.txt', filetypes = (("Text Files","*.txt"), ("Python", "*.py"), ("All Files","*.*")))
+        t = text.get(0.0, END)
+        f.write(t.rstrip())
+        messagebox.showinfo("succes", "Le fichier a ete sauvegardé avec succés.")
+    except Exception as e:
+        print(e)
+        messagebox.showinfo("Error!", "Error Occurred While Saving..", kind="warning")
+
 def quitFile():
     root.destroy()
 def cut():
@@ -44,16 +56,11 @@ def copy():
 def paste():
     text.event_generate(("<<Paste>>"))
 
-def refais():
-    text.edit_undo()
-    return
-
-
 def select():
     text.tag_add("sel", "1.0", "end")
 
     
-def info():
+def info(): 
     messagebox.showinfo("About Bloc note", '''Bloc note
     
 Version - 1.1.1
@@ -61,6 +68,24 @@ Developper: kenne idriss
             christopher Ferry 
             Loic K
     de la premiere année en informatique a L'Ecole IT''')
+def Aide():
+    messagebox.showinfo("Utilisation", '''pour l'utilisation de ce bloc note , certain fonction sont utilisable uniquement 
+et simplement grace a un simple clique droit avec la souris sur la fonction ou sur l'action que vous souhaitez faire.
+        la saisir de texte ce fais avec le clavier et les raccourcis clavier sont belle et bien toujour valable sur ce bloc note !
+                la partie operation de ce bloc note vous aideras a fais des calcule simple et scientifique , elle est utilisable 
+uniquement avec la souris et le clic droit
+                       
+ Pour créer un nouveau fichier, cliquez sur "Nouveau".
+                        
+Pour ouvrir un fichier existant, cliquez sur "Ouvrir" et sélectionnez le fichier souhaité dans la boîte de dialogue.
+                        
+Pour enregistrer le fichier actuel, cliquez sur "Sauvegardé". Si c'est la première fois que vous enregistrez le fichier, une boîte de dialogue vous demandera où le sauvegarder.
+Pour enregistrer sous , utilisez "Sauvegardé sous".
+                        
+Utilisez "Cut", "Copy" et "paste" pour manipuler le texte sélectionné.
+                        
+Utilisez l'option style pour changer la forme du texte en "italic" ou "gras".
+Pour quitter, sélectionnez "Quitter" dans le menu "Fichier''')
 
 
 def changeSizeWindow():
@@ -472,6 +497,7 @@ if __name__ == "__main__":
     FileMenu.add_command(label="nouveau fichier", command=newFile)
     FileMenu.add_command(label="ouvrir un fichier", command=openFile)
     FileMenu.add_command(label="Sauvegardé", command=save)
+    FileMenu.add_command(label="Sauvegardé sous", command=saveAs)
     FileMenu.add_command(label="Quitte", command=quitFile)
     MenuBar.add_cascade(label="Fchier", menu=FileMenu)
 
@@ -479,8 +505,7 @@ if __name__ == "__main__":
     EditMenu.add_command(label="Cut", command=cut)
     EditMenu.add_command(label="Copy", command=copy)
     EditMenu.add_command(label="Paste", command=paste)
-    EditMenu.add_command(label="selectionner", command=select)
-    EditMenu.add_command(label="undo", command=refais)
+    EditMenu.add_command(label="selectionner tous", command=select)
     EditMenu.add_command(label="Size", command=changeSize)
    
     
@@ -499,6 +524,7 @@ if __name__ == "__main__":
 
     HelpMenu = Menu(MenuBar, tearoff=0)
     HelpMenu.add_command(label="about", command=info)
+    HelpMenu.add_command(label="Utilisation", command=Aide)
     MenuBar.add_cascade(label="Help", menu=HelpMenu)
 
     
