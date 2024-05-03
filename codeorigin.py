@@ -49,7 +49,9 @@ def info():
     messagebox.showinfo("About Bloc note", '''Bloc note
     
 Version - 1.1.1
-Developper - kenne idriss, christopher, Loic
+Developper: kenne idriss
+            christopher Ferry 
+            Loic K
     de la premiere année en informatique a L'Ecole IT''')
 
 
@@ -74,6 +76,25 @@ def changeSizeWindow():
 
 def changeSize():
     changeSizeWindow()
+
+def gras():
+    gras_font = text.tag_ranges("sel")
+   
+    text.tag_config("bold", font=("Arial", 15, "bold" ))
+    tag_actu = text.tag_names("sel.first")
+    text.tag_add("bold", "sel.first", "sel.last")
+
+
+def mettre_en_italique():
+    # Obtient les indices du texte sélectionné
+    debut, fin = text.tag_ranges("sel")
+    # Applique la balise "italique" au texte sélectionné
+    text.tag_add("italique", debut, fin)
+    # Crée une balise "italique" qui met le texte en italique
+    text.tag_configure("italique", font=("Arial", 15, "italic"))
+
+
+
 
 
 
@@ -451,15 +472,12 @@ if __name__ == "__main__":
     EditMenu.add_command(label="Cut", command=cut)
     EditMenu.add_command(label="Copy", command=copy)
     EditMenu.add_command(label="Paste", command=paste)
-    EditMenu.add_command(label="Font Size", command=changeSize)
+    EditMenu.add_command(label="Size", command=changeSize)
    
     
     
     MenuBar.add_cascade(label="Edition", menu=EditMenu)
 
-    HelpMenu = Menu(MenuBar, tearoff=0)
-    HelpMenu.add_command(label="about", command=info)
-    MenuBar.add_cascade(label="Help", menu=HelpMenu)
 
     formenu= Menu(MenuBar, tearoff=0)
     formenu.add_cascade(label= "Gras", command=gras)
@@ -469,6 +487,10 @@ if __name__ == "__main__":
     calomenu= Menu(MenuBar, tearoff=0)
     calomenu.add_cascade(label= "Calculatrice", command=calulatrice)
     MenuBar.add_cascade(label="Operation", menu=calomenu)
+
+    HelpMenu = Menu(MenuBar, tearoff=0)
+    HelpMenu.add_command(label="about", command=info)
+    MenuBar.add_cascade(label="Help", menu=HelpMenu)
 
     
 
